@@ -1,4 +1,6 @@
+  var alertnum = 0;
 function startTheShow() {
+
 
 	var globalArray = Array();
 	var nfc_scores = Array();
@@ -23,7 +25,10 @@ function startTheShow() {
 					if (j == 0)
 						col.innerHTML = afc_scores[i - 1]
 					else {
-						col.innerHTML = globalArray[((i - 1) * 10) + (j - 1)];
+            if(globalArray[((i - 1) * 10) + (j - 1)] == undefined)
+              col.innerHTML = "EMPTY"
+            else
+              col.innerHTML = globalArray[((i - 1) * 10) + (j - 1)];
 					}
 				}
 				row.appendChild(col);
@@ -68,10 +73,10 @@ function startTheShow() {
 
 			globalArray = globalArray.concat(localArray);
 		}
-		globalArray = shuffle(globalArray)
-		console.log(globalArray)
-		if (globalArray.length != 100)
+    globalArray = shuffle(globalArray)
+		if (globalArray.length != 100 && alertnum == 0)
 			alert("Warning. You do not have 100 boxes")
+    alertnum++;
 
 		// console.log(lines)
 		// alert(lines);
@@ -83,6 +88,7 @@ function startTheShow() {
 
 }
 $('#mySubmit').on('click', function (event) {
+  alertnum = 0;
   (function myLoop (i) {
    setTimeout(function () {
       startTheShow();          //  your code here
